@@ -9,12 +9,14 @@
     "serve": "node dist/index.js"
   },
   "author": "Jordan Vartanian",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
     "dotenv": "^4.0.0",
     "express": "^4.14.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "passport": "^0.4.0",
+    "passport-twitter": "^1.0.4"
   },
   "devDependencies": {
     "eslint": "^4.16.0",
