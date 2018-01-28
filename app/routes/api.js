@@ -1,21 +1,21 @@
 const express = require('express');
-const querystring = require('querystring');
 
 const app = express.Router();
 
-const fetchTweets = '../service/tweets'
+const fetchTweets = require('../service/tweets');
 
 app.get('/health', (req, res) => {
   res.status(200).send('Health: ok');
 });
 
-app.post('/connect', (req, res) => {
-  res.json(req.user)
-})
-
-app.get('/tweets', (req, res) => {
-  console.log(req.user.id)
-
-})
+app.get('/tweets', async (req, res) => {
+  try {
+    const tweets = await fetchTweets({ userId: req.user.id, count: 100 });
+    res.json(tweets);
+  } catch (e) {
+    if (!req.user) res.status(401).send();
+    else res.status(500).send();
+  }
+});
 
 module.exports = app;

@@ -1,6 +1,5 @@
 const bodyparser = require('body-parser');
-const cookieParser = require('cookie-parser');
-var session = require('express-session')
+const session = require('express-session');
 
 const express = require('express');
 
@@ -11,11 +10,14 @@ const auth = require('./auth');
 const api = require('./api');
 
 app.use(bodyparser.json());
-app.use(session({ 
-  secret: process.env.SESSION_SECRET, 
-  resave: true, 
-  saveUninitialized: true })
-);
+
+// TODO: Needs a memory cache to persist data. Currently persisting data to MemoryStore
+//       DEVELOPMENT ONLY
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
