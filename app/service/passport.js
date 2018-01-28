@@ -12,7 +12,6 @@ passport.use(new TwitterStrategy(
     callbackURL: process.env.TWITTER_CALLBACK_URL,
   },
   ((accessToken, refreshToken, profile, cb) => {
-    console.log(accessToken, refreshToken, profile)
     return cb(null, profile);
   }),
 ));
