@@ -1,47 +1,82 @@
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
+const webpack = require('webpack'); // to access built-in plugins
 const path = require('path');
-const webpack = require('webpack');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-  template: path.resolve(__dirname, 'src/public/index.html'),
-  filename: 'index.html',
-  inject: 'body',
-});
-
-module.exports = {
+const config = {
   entry: [
-    path.resolve(__dirname, 'src/index.js'),
+    'babel-polyfill',
+    path.resolve(__dirname, 'src/index.js')
   ],
-  devtool: 'eval',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    pathinfo: true,
+    filename: 'static/js/bundle.js',
+  },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, include: path.resolve(__dirname, 'src'), loader: 'babel' },
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
+    rules: [
+      {
+        oneOf: [
+          {
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            loader: require.resolve('url-loader'),
+            options: {
+              limit: 10000,
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+          {
+            test: /\.(js|jsx)$/,
+            include: path.resolve(__dirname, 'src'),
+            loader: require.resolve('babel-loader'),
+            options: {
+              cacheDirectory: true,
+            },
+          },
+          {
+            test: /\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  modules: true,
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-cssnext')({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            loader: require.resolve('file-loader'),
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
-  output: {
-    filename: 'index_bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
   plugins: [
-    HTMLWebpackPluginConfig,
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new HtmlWebpackPlugin({ template: './src/public/index.html' }),
   ],
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './',
-    proxy: {
-      '/api/**': {
-        target: 'http://localhost:3000',
-        secure: false,
-        changeOrigin: true,
-      },
-    },
-  },
 };
+
+module.exports = config;

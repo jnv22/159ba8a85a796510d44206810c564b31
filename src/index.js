@@ -5,13 +5,11 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import store from './store';
-import Routes from './routes';
-
-const history = syncHistoryWithStore(browserHistory, store);
+import App from './Containers/App';
 
 render(
   <Provider store={store}>
-    <Routes history={history} />
+    <App />
   </Provider>,
-  document.getElementById('twitter_app')
+  document.getElementById('twitter_app'),
 );
