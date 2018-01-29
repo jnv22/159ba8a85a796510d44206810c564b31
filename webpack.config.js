@@ -74,6 +74,12 @@ const config = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+        'API_BASE_URL': JSON.stringify('http://localhost:3001/api/v1')
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({ template: './src/public/index.html' }),
   ],

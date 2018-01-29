@@ -1,14 +1,10 @@
 const types = {
-  OAUTH: 'app/OAUTH',
   GET_USER_DATA: 'app/GET_USER_DATA',
   GET_TWEETS: 'app/GET_TWEETS',
   DISCONNECT: 'app/DISCONNECT',
 };
 
-const actions = {
-  callOAuth: () => ({
-    type: types.OAUTH,
-  }),
+const template = {
   getUserData: () => ({
     type: types.GET_USER_DATA,
   }),
@@ -20,4 +16,7 @@ const actions = {
   }),
 };
 
-export default actions;
+export default {
+  types,
+  template,
+};

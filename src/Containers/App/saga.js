@@ -1,15 +1,17 @@
-import { takeLatest } from 'redux-saga/effects';
+import { takeEvery, call } from 'redux-saga/effects';
+import actions from './actions';
+import api from '../../lib/api';
 
-
-function* test(action) {
+function* getUserData() {
   try {
-    yield null;
+    yield call(api);
   } catch (e) {
-    return null;
+    console.log(e);
   }
 }
-function* saga() {
-  yield takeLatest('test', test);
-}
 
-export default saga;
+export default function* saga() {
+  yield [
+    takeEvery(actions.types.GET_USER_DATA, getUserData),
+  ];
+}
