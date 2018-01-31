@@ -7,7 +7,7 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import actions from './actions';
 import { fetchUserData, fetchTweets, logOut } from '../../lib/api';
 
-function* oAuthSuccessRedirect() {
+export function* oAuthSuccessRedirect() {
   try {
     const getUserData = yield call(fetchUserData);
     if (getUserData) {
@@ -22,7 +22,7 @@ function* oAuthSuccessRedirect() {
   }
 }
 
-function* oAuthFailureRedirect() {
+export function* oAuthFailureRedirect() {
   try {
     yield put(push('/'));
   } catch (e) {
@@ -30,7 +30,7 @@ function* oAuthFailureRedirect() {
   }
 }
 
-function* tweets() {
+export function* tweets() {
   try {
     const getTweets = yield call(fetchTweets);
     if (getTweets) {
@@ -45,7 +45,7 @@ function* tweets() {
   }
 }
 
-function* disconnect() {
+export function* disconnect() {
   try {
     yield call(logOut);
     localStorage.setItem('userData', null);

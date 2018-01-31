@@ -1,9 +1,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, IndexRedirect } from 'react-router';
+import { Router, Route } from 'react-router';
 
-// Pages
 import App from './Containers/App';
 import actions from './Containers/App/actions';
 

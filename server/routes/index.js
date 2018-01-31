@@ -32,5 +32,6 @@ app.use((req, res, next) => {
 
 app.use('/', api);
 app.use('/', auth);
+app.use('*', (req, res) => res.render('index'));
 
 module.exports = app;
