@@ -11,6 +11,7 @@ class App extends Component {
       <div>
         <a href={`${process.env.API_BASE_URL}/oauth_request`}>LOGIN HERE</a>
         <h2 onClick={this.props.getUserData}>Get Data</h2>
+        {this.props.children}
       </div>
     );
   }

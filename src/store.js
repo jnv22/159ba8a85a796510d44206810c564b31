@@ -1,6 +1,6 @@
 import createSagaMiddleware from 'redux-saga';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
 import reducer from './Containers/App/reducer';
@@ -13,8 +13,13 @@ const middlewares = [
   routerMiddleware(browserHistory),
 ];
 
-const store = createStore(
+const rootReducer = combineReducers({
   reducer,
+  routing: routerReducer,
+});
+
+const store = createStore(
+  rootReducer,
   compose(
     applyMiddleware(...middlewares),
     window.devToolsExtension ? window.devToolsExtension() : f => f,

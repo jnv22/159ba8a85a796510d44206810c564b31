@@ -7,9 +7,9 @@ const passport = require('../service/passport');
 app.get('/oauth_request', passport.authenticate('twitter'));
 
 app.get(
-  '/oauth_request/callback', passport.authenticate('twitter', { failureRedirect: `${process.env.BASE_URL}${process.env.CLIENT_PORT}` }),
+  '/oauth_request/callback', passport.authenticate('twitter', { failureRedirect: `${process.env.BASE_URL}${process.env.CLIENT_PORT}/failure` }),
   (req, res) => {
-    res.redirect(`${process.env.BASE_URL}:${process.env.CLIENT_PORT}`);
+    res.redirect(`${process.env.BASE_URL}:${process.env.CLIENT_PORT}/success`);
   },
 );
 

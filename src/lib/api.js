@@ -10,8 +10,9 @@ const userData = async () => {
       }),
     });
     const responseToJSON = await response.json();
-    console.log(responseToJSON, 'WOOO');
+    return responseToJSON;
   } catch (e) {
+    return null;
     console.log(e, 'error');
   }
 };
