@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "webpack-dev-server --progress --history-api-fallback",
-    "start": "nodemon server/index.js",
+    "start": "nodemon server/index.js --watch server",
     "build": "babel server -d dist",
     "serve": "node dist/index.js"
   },
@@ -21,8 +21,10 @@
     "express-session": "^1.15.6",
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
+    "moment": "^2.20.1",
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",

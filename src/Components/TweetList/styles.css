@@ -1,0 +1,14 @@
+.list {
+  width: 300px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.date {
+  border-bottom: 1px solid black;
+}
+
+.message {
+  margin: 0;
+}

@@ -13,6 +13,7 @@ app.get('/tweets', async (req, res) => {
     const tweets = await fetchTweets({ userId: req.user.id, count: 100 });
     res.json(tweets);
   } catch (e) {
+    console.log(req.user);
     if (!req.user) res.status(401).send();
     else res.status(500).send();
   }

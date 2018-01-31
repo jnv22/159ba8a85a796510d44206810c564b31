@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
-import reducer from './Containers/App/reducer';
+import applicationReducer from './Containers/App/reducer';
 import applicationSaga from './Containers/App/saga';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -14,7 +14,7 @@ const middlewares = [
 ];
 
 const rootReducer = combineReducers({
-  reducer,
+  applicationReducer,
   routing: routerReducer,
 });
 
