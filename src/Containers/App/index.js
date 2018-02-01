@@ -11,13 +11,13 @@ class App extends Component {
     return (
       <div className={styles.container}>
         {this.props.error ? <span> Error: {this.props.error} </span> : null}
-        { this.props.isLoggedIn ? (
+        {this.props.isLoggedIn ? (
           <div>
             <h2>Display Name: {this.props.userData.displayName}</h2>
             <h2>User Name: {this.props.userData.username}</h2>
             <img className={styles.img} src={this.props.userData.photos[0].value} alt="User" />
-            <button type="button" onClick={this.props.getTweets} >Refresh Tweets</button>
-            <button type="button" onClick={this.props.disconnect} >Logout</button>
+            <button type="button" onClick={this.props.getTweets}>Refresh Tweets</button>
+            <button type="button" onClick={this.props.disconnect}>Logout</button>
             <TweetList tweets={this.props.tweets} />
           </div>
         ) : (

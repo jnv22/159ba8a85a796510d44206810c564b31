@@ -7,7 +7,7 @@ class TweetList extends Component {
   render() {
     return (
       <div>
-        { this.props.tweets ? (
+        {this.props.tweets ? (
           <ul className={styles.list}>
             {
               this.props.tweets.map(tweet => (
