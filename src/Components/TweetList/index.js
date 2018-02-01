@@ -11,7 +11,7 @@ class TweetList extends Component {
           <ul className={styles.list}>
             {
               this.props.tweets.map(tweet => (
-                <li>
+                <li key={tweet.id}>
                   <p className={styles.date}>{tweet.created_at}</p>
                   <p className={styles.message}>{tweet.text}</p>
                 </li>

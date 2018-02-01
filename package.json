@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:webpackdev": "webpack-dev-server --progress --history-api-fallback",
+    "start:webpackdev": "webpack-dev-server --progress --history-api-fallback --env.NODE_ENV=development --env.API_BASE_URL=http://localhost:3001/api/v1",
     "start:server": "nodemon server/index.js --watch server:server",
-    "start": "webpack && node build.js && npm run start:server",
+    "start": "webpack --env.NODE_ENV=production --env.API_BASE_URL=http://localhost:3001/api/v1 && node build.js && npm run start:server",
     "test": "mocha --compilers js:babel-core/register --recursive ./tests/*.test.js"
   },
   "author": "Jordan Vartanian",

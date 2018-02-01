@@ -35,10 +35,12 @@ export function* tweets() {
     const getTweets = yield call(fetchTweets);
     if (getTweets) {
       const tweets = getTweets.map(tweet => ({
+        id: tweet.id,
         created_at: moment(tweet.created_at).format('MMMM Do YYYY, h:mm a'),
         text: tweet.text,
       }));
       yield put(actions.template.saveTweets(tweets));
+      localStorage.setItem('tweets', JSON.stringify(tweets));
     } else throw 'Unable to fetch Tweets';
   } catch (e) {
     yield put(actions.template.error(e));
@@ -49,6 +51,7 @@ export function* disconnect() {
   try {
     yield call(logOut);
     localStorage.setItem('userData', null);
+    localStorage.setItem('tweets', null);
   } catch (e) {
     yield put(actions.template.error(e));
   }
