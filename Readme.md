@@ -8,8 +8,8 @@ Web App that authenticates with Twitter and displays the user's tweets
   ```
   git@github.com:jnv22/159ba8a85a796510d44206810c564b31.git
   ```
-* Fill out the server information
-  **Note**: `PORT` and `CLIENT_PORT` will **USUALLY** be the same since the server will be serving the application. These two can be different if using the server and webpack dev server, respectively.
+* Fill out the server information.
+  **Note**: `PORT` and `CLIENT_PORT` will **USUALLY** be the same since the server will be serving the application. These two can be different if using the server and webpack dev server.
   ```
   cp .env.example .env
    ```
