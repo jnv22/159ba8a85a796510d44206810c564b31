@@ -1,9 +1,8 @@
 # Twitter authentication and tweet retrieval application
----
 
 Web App that authenticates with Twitter and displays the user's tweets
 
----
+
 ## Quickstart
 * git clone the repo
   ```
