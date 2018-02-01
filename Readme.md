@@ -23,7 +23,7 @@ Web App that authenticates with Twitter and displays the user's tweets
   npm run start
   ```
 
-### Before continuing, ensure that you ran through the QuickStart steps above, and the application is cloned, dependencies are installed, and .env is filled out
+### Before continuing, ensure that you have run through the QuickStart steps above, and the application is cloned, dependencies are installed, and .env is filled out
 ## Development Mode
 **Note**: in .env file, `PORT` and `CLIENT_PORT` will be different since the server and webpack dev server will be running seperately. `CLIENT_PORT` should be set to 8080. This is the default port set in webpack, can be modified in the webpack config.
 * Open two terminal windows.  
