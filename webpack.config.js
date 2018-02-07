@@ -11,7 +11,7 @@ const config = function(env) {
     output: {
       path: path.resolve(__dirname, 'server', 'public'),
       pathinfo: true,
-      publicPath: 'static/js',
+      publicPath: '/',
       filename: 'bundle.js',
     },
     module: {
