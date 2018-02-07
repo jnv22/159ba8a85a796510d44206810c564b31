@@ -1,5 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
 const webpack = require('webpack'); // to access built-in plugins
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
 const path = require('path');
 
 const config = function(env) {
@@ -9,9 +9,10 @@ const config = function(env) {
       path.resolve(__dirname, 'src/index.js')
     ],
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'server', 'public'),
       pathinfo: true,
-      filename: 'static/js/bundle.js',
+      publicPath: 'static/js',
+      filename: 'bundle.js',
     },
     module: {
       rules: [
@@ -82,7 +83,10 @@ const config = function(env) {
         }
       }),
       new webpack.optimize.UglifyJsPlugin(),
-      new HtmlWebpackPlugin({ template: './src/public/index.html' }),
+      new HtmlWebpackPlugin({
+        filename: `${path.join(__dirname, "server", "views", "index.ejs")}`,
+        template:`${path.join(__dirname, "src", "public", "index.html")}`, 
+      }),
     ],
   }
 };
