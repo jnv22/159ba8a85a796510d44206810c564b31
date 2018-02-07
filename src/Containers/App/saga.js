@@ -14,7 +14,7 @@ export function* oAuthSuccessRedirect() {
       const userData = pick(getUserData, ['username', 'displayName', 'photos']);
       yield put(actions.template.oAuthSuccessVerify(userData));
       localStorage.setItem('userData', JSON.stringify(userData));
-    } else throw 'Invalid Redirect';
+    } else throw new Error('Invalid Redirect');
   } catch (e) {
     yield put(actions.template.error(e));
   } finally {
@@ -30,7 +30,7 @@ export function* oAuthFailureRedirect() {
   }
 }
 
-export function* tweets() {
+export function* retrieveTweets() {
   try {
     const getTweets = yield call(fetchTweets);
     if (getTweets) {
@@ -41,7 +41,7 @@ export function* tweets() {
       }));
       yield put(actions.template.saveTweets(tweets));
       localStorage.setItem('tweets', JSON.stringify(tweets));
-    } else throw 'Unable to fetch Tweets';
+    } else throw new Error('Unable to fetch Tweets');
   } catch (e) {
     yield put(actions.template.error(e));
   }
@@ -61,7 +61,7 @@ export default function* saga() {
   yield [
     takeEvery(actions.types.OAUTH_SUCCESS_REDIRECT, oAuthSuccessRedirect),
     takeEvery(actions.types.OAUTH_FAILURE, oAuthFailureRedirect),
-    takeEvery(actions.types.GET_TWEETS, tweets),
+    takeEvery(actions.types.GET_TWEETS, retrieveTweets),
     takeEvery(actions.types.DISCONNECT, disconnect),
   ];
 }
